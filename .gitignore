@@ -21,3 +21,5 @@ public/vendor
 .lando.yml
 Dockerfile.custom
 php.ini
+
+/.ddev
