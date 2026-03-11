@@ -25,7 +25,8 @@ class ShowGrupos extends Component
     #[On('refresh')]
     public function refresh()
     {
-        $this->mount();
+        $this->itensSemGrupo = Gate::allows('manager') ? Item::whereNull('grupo_id')->get() : collect();
+        $this->grupos = Grupo::all();
     }
 
     public function menuDinamico()

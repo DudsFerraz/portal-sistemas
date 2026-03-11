@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3" wire:key="grupo-{{ $grupo->id }}">
   <div class="card-header py-2">
     <span class="h4 py-0">
       @if (!$grupo->exibir)
