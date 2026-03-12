@@ -42,7 +42,7 @@ class GrupoForm extends Component
     #[On('criarGrupo')]
     public function criarGrupo()
     {
-        Gate::allows('manager');
+        Gate::authorize('manager');
         $this->mount();
         $this->dispatch('openGrupoModal', modalTitle: 'Novo grupo');
     }
@@ -50,7 +50,7 @@ class GrupoForm extends Component
     #[On('editarGrupo')]
     public function editarGrupo($grupoId)
     {
-        Gate::allows('manager');
+        Gate::authorize('manager');
         $this->grupo = Grupo::find($grupoId);
         $this->colunaArray = $this->grupo->colunaArray();
         $this->ordemArray = $this->grupo->ordemArray();
@@ -59,7 +59,7 @@ class GrupoForm extends Component
     }
 
     public function salvarGrupo() {
-        Gate::allows('manager');
+        Gate::authorize('manager');
 
         $this->validate();
         $this->grupo->save();
@@ -71,7 +71,7 @@ class GrupoForm extends Component
 
     #[On('destruirGrupo')]
     public function destruirGrupo($grupoId) {
-        Gate::allows('manager');
+        Gate::authorize('manager');
         Grupo::destroy($grupoId);
         $this->mount();
         $this->dispatch('refresh')->to(ShowGrupos::class);

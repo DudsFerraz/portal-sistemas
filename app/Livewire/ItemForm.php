@@ -30,7 +30,7 @@ class ItemForm extends Component
     #[On('criarItem')]
     public function criarItem($grupo_id = null)
     {
-        Gate::allows('manager');
+        Gate::authorize('manager');
         $this->mount();
         $this->item->grupo_id = $grupo_id;
         $this->dispatch('openItemModal', modalTitle:'Novo item');
@@ -39,7 +39,7 @@ class ItemForm extends Component
     #[On('editarItem')]
     public function editarItem($itemId)
     {
-        Gate::allows('manager');
+        Gate::authorize('manager');
         $this->item = Item::find($itemId);
         $this->gruposSelect = Grupo::pluck('nome', 'id');
         $this->dispatch('openItemModal', modalTitle: 'Editar item');
@@ -48,7 +48,7 @@ class ItemForm extends Component
 
     public function salvarItem()
     {
-        Gate::allows('manager');
+        Gate::authorize('manager');
         $this->validate();
         $this->item->save();
         $this->dispatch('closeItemModal');
@@ -59,7 +59,7 @@ class ItemForm extends Component
     #[On('destruirItem')]
     public function destruirItem($itemId)
     {
-        Gate::allows('manager');
+        Gate::authorize('manager');
         Item::destroy($itemId);
         $this->mount(); // inicializa as variaveis
         $this->dispatch('refresh')->to(ShowGrupos::class);
